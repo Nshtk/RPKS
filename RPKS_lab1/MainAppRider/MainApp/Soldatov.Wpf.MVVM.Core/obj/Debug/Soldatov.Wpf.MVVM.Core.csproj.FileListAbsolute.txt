@@ -1,0 +1,6 @@
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\bin\Debug\Soldatov.Wpf.MVVM.Core.dll
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\bin\Debug\Soldatov.Wpf.MVVM.Core.pdb
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\obj\Debug\Soldatov.Wpf.MVVM.Core.csproj.AssemblyReference.cache
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\obj\Debug\Soldatov.Wpf.MVVM.Core.csproj.CoreCompileInputs.cache
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\obj\Debug\Soldatov.Wpf.MVVM.Core.dll
+C:\Users\Root\Documents\Labs\RPKS\MainAppRider\MainApp\Soldatov.Wpf.MVVM.Core\obj\Debug\Soldatov.Wpf.MVVM.Core.pdb

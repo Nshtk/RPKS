@@ -1,0 +1,36 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Soldatov.Wpf.Controls;assembly=Soldatov.Wpf.Controls"
+    xmlns:mvvm="clr-namespace:Soldatov.Wpf.MVVM;assembly=Soldatov.Wpf.MVVM">
+    
+    <mvvm:TransparencyConverter x:Key="TransparencyConverter"/>
+    
+    <Style x:Key="MessageDialogStyle" TargetType="controls:MessageDialog">
+        <Style.Resources>
+            <Style x:Key="ScrollViewerStyle" TargetType="ScrollViewer">
+                <Setter Property="Background" Value="{Binding Transparency, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DialogHost}, Converter={StaticResource TransparencyConverter}}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="FontFamily" Value="{Binding Font, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        <Setter Property="FontSize" Value="{Binding Size, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        <Setter Property="FontWeight" Value="{Binding Weight, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="White"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="NumericKeyboardStyle">
+        <Style.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}"></Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>
