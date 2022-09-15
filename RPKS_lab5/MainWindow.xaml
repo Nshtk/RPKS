@@ -1,0 +1,80 @@
+﻿<Window x:Class="RPKS_lab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RPKS_lab5"
+        xmlns:models="clr-namespace:RPKS_lab5.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="EnumData" MethodName="GetValues" ObjectType="{x:Type models:FontAttributes+FormatEnum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:FontAttributes+FormatEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <models:VisibilityConverter x:Key="VisibilityConverter"/>
+        <models:EnumConverter x:Key="EnumConverter"/>
+        <models:BoolConverter x:Key="BoolConverter"/>
+        <models:BrushConverter x:Key="BrushConverter"/>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <Button DockPanel.Dock="Left" Width="66" Command="{Binding CmdPreviousPage}"></Button>
+        <Button DockPanel.Dock="Right" Width="66" Command="{Binding CmdNextPage}"></Button>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel >
+                <TextBlock Text="{Binding Text}" TextAlignment="Center" FontFamily="{Binding EnvisionedFont.FontName}" FontSize="{Binding EnvisionedFont.FontSize}" FontStyle="{Binding EnvisionedFont.FontFormat, Converter={StaticResource EnumConverter}}" Foreground="{Binding EnvisionedFont.FontColor}"></TextBlock>
+                <TextBlock Text="{Binding Hint}" TextAlignment="Center" FontFamily="{Binding DevisionedFont.FontName}" FontSize="{Binding DevisionedFont.FontSize}" Foreground="{Binding DevisionedFont.FontColor}"></TextBlock>
+                <TextBlock Text="{Binding Score}" TextAlignment="Center" FontSize="16" ></TextBlock>
+            </StackPanel>
+            
+            
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Source={x:Static models:FontAttributes.names}}" SelectedItem="{Binding DevisionedFont.FontName, Mode=OneWayToSource}"  Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}" IsEnabled="{Binding Enabled, Mode=OneWay, Converter={StaticResource BoolConverter}, ConverterParameter=1}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Source={x:Static models:FontAttributes.sizes}}" SelectedItem="{Binding DevisionedFont.FontSize, Mode=OneWayToSource}" Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=2}" IsEnabled="{Binding Enabled, Mode=OneWay, Converter={StaticResource BoolConverter}, ConverterParameter=2}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Source={StaticResource EnumData}}" SelectedItem="{Binding DevisionedFont.FontFormat, Mode=OneWayToSource, Converter={StaticResource EnumConverter}}" Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=3}" IsEnabled="{Binding Enabled, Mode=OneWay, Converter={StaticResource BoolConverter}, ConverterParameter=3}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="{Binding}">
+                            <TextBlock Text="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Source={x:Static models:FontAttributes.colors}}" SelectedItem="{Binding DevisionedFont.FontColor, Mode=OneWayToSource, Converter={StaticResource BrushConverter}}" Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=4}" IsEnabled="{Binding Enabled, Mode=OneWay, Converter={StaticResource BoolConverter}, ConverterParameter=4}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="{Binding}">
+                            <TextBlock Text="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <Button Grid.Row="1" Content="Start" FontSize="16" Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=0}" Command="{Binding CmdStart}"></Button>
+            <Button Grid.Row="3" Content="End" FontSize="16" Visibility="{Binding Pages, Mode=OneWay, Converter={StaticResource VisibilityConverter}, ConverterParameter=0}" Command="{Binding CmdEnd}"></Button>
+            <Button Grid.Row="3" Content="Check" FontSize="16" Visibility="{Binding CheckButtonVisibility, Mode=OneWay}" Command="{Binding CmdCheck}"></Button>
+        </Grid>
+    </DockPanel>
+</Window>
